@@ -14,6 +14,8 @@ def main():
         m_state.gprs.clear()
         m_state.pc = 0
 
+    print("Bye!")
+
 
 def process(m_state):
     # read the assembly file
@@ -31,7 +33,16 @@ def process(m_state):
     if ch == 'Y':
         showTrack = True
 
-    while
+    while m_state.pc < len(instrs):
+        cur_instr = instrs[m_state.pc]
+        cur_instr.execute(m_state)
+
+        if showTrack:
+            print(cur_instr.print_instr())
+            m_state.printState()
+
+    if not showTrack:
+        m_state.printState()
 
     print("Continue?(Y/N)")
     ch = input().strip()

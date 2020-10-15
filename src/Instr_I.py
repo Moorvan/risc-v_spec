@@ -5,7 +5,7 @@ from Machine_State import *
 # This class defines part of the RISC-V 'I' (Base) instructions.
 
 class Instr_I:
-    def __init__(self, op, rd, rs1, rs2=0, imm=0):
+    def __init__(self, instr, op, rd, rs1, rs2=0, imm=0):
         # Map the str of op to the function of how to execute the instruction
         self.map = {
             'add': self._ADD,
@@ -13,11 +13,15 @@ class Instr_I:
             'sd': self._SD,
             'beq': self._BEQ
         }
+        self._str = instr
         self.op = self.map.get(op)
         self.rd = rd
         self.rs1 = rs1
         self.rs2 = rs2
         self.imm = imm
+
+    def print_instr(self):
+        print(self._str)
 
     # this function can change the input machine state after executing the instruction
     def execute(self, m_state):

@@ -42,34 +42,34 @@ class Read_File:
         strList = re.split(" |, |,|\(|\)", instr)
         op = strList[0]
         # print(op)
-        return op_type.get(op)(strList, labelTable)
+        return op_type.get(op)(strList, labelTable, instr)
 
     @classmethod
-    def decode_add(cls, strList, labelTable):
+    def decode_add(cls, strList, labelTable, instr):
         op = strList[0]
         rs1 = int(strList[2][1:])
         rs2 = int(strList[3][1:])
         rd = int(strList[1][1:])
-        return Instr_I(op, rd, rs1, rs2)
+        return Instr_I(instr, op, rd, rs1, rs2)
 
     @classmethod
-    def decode_addi(cls, strList, labelTable):
+    def decode_addi(cls, strList, labelTable, instr):
         op = strList[0]
         rd = int(strList[1][1:])
         rs1 = int(strList[2][1:])
         imm = int(strList[3])
-        return Instr_I(op, rd, rs1, 0, imm)
+        return Instr_I(instr, op, rd, rs1, 0, imm)
 
     @classmethod
-    def decode_sd(cls, strList, labelTable):
+    def decode_sd(cls, strList, labelTable, instr):
         op = strList[0]
         rs1 = int(strList[1][1:])
         rs2 = int(strList[3][1:])
         imm = int(strList[2])
-        return Instr_I(op, 0, rs1, rs2, imm)
+        return Instr_I(instr, op, 0, rs1, rs2, imm)
 
     @classmethod
-    def decode_beq(cls, strList, labelTable):
+    def decode_beq(cls, strList, labelTable, instr):
         op = strList[0]
         rs1 = int(strList[1][1:])
         rs2 = int(strList[2][1:])
@@ -80,7 +80,7 @@ class Read_File:
                 return "Error"
         else:
             imm = int(strList[3])
-        return Instr_I(op, 0, rs1, rs2, imm)
+        return Instr_I(instr, op, 0, rs1, rs2, imm)
 
 
 # Map str of op to the function of how to decode the assembly code
@@ -98,3 +98,4 @@ if __name__ == '__main__':
         print("File not found")
     else:
         print("Yes")
+
