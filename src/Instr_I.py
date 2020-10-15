@@ -41,4 +41,7 @@ class Instr_I:
         m_state.mem.set_mem(addr, a)
 
     def _BEQ(self, m_state):
-        pass
+        a = m_state.gprs.get_reg(self.rs1)
+        b = m_state.gprs.get_reg(self.rs2)
+        if ALU.alu_eq(a, b):
+            m_state.pc = self.imm

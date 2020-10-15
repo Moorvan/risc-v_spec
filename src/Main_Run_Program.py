@@ -4,7 +4,41 @@ from Machine_State import *
 
 
 def main():
-    pass
+    print("This is a risc-v Emulator.")
+    m_state = Machine_State()
+    while process(m_state):
+        print("Do you want to clean the Memory?(Y/N)")
+        ch = input().strip()
+        if ch == 'Y':
+            m_state.mem.clear()
+        m_state.gprs.clear()
+        m_state.pc = 0
+
+
+def process(m_state):
+    # read the assembly file
+    print("Please input the risc-v assembly file:")
+    showTrack = False
+    fileName = input().strip()
+    instrs, pc = Read_File.file_decode(fileName)
+    m_state.pc = pc
+    if instrs == Error.FileNotFound:
+        print("The input file is not exist.")
+        return 1
+
+    print("Do you want to show the machine state every step?(Y/N")
+    ch = input().strip()
+    if ch == 'Y':
+        showTrack = True
+
+    while
+
+    print("Continue?(Y/N)")
+    ch = input().strip()
+    if ch == 'Y':
+        return 1
+    else:
+        return 0
 
 
 if __name__ == '__main__':
