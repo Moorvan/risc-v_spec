@@ -1,4 +1,5 @@
 from collections import OrderedDict
+from Error import *
 
 
 # define the module of Memory
@@ -10,7 +11,7 @@ class Memory:
     def get_mem(self, addr):
         if self._data.get(addr):
             return self._data.get(addr)
-        return "Error"
+        return Error.AccessUndefinedMemory
 
     def set_mem(self, addr, v):
         self._data[addr] = v

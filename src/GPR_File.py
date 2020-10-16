@@ -1,3 +1,6 @@
+from Error import *
+
+
 # define General Purpose Register File
 
 class GPR_File:
@@ -6,14 +9,15 @@ class GPR_File:
         self._regs = [0] * 32
 
     def get_reg(self, n):
+        if n > 31 or n < 0:
+            return Error.IllegalRegisterIndex
         return self._regs[n]
 
     def set_reg(self, n, v):
         if n == 0:
             return
         if n > 31 or n < 0:
-            print("Error Index")
-            return
+            return Error.IllegalRegisterIndex
         self._regs[n] = v
 
     def clear(self):

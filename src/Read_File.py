@@ -24,6 +24,7 @@ class Read_File:
         instr_Is = []
         pc = 0
         for line in ls:
+            line = line.strip()
             if line.find(':') != -1:
                 labels[line[0:line.find(':')]] = cnt + 1
                 if line[0:line.find(':')] == 'main':
@@ -33,6 +34,8 @@ class Read_File:
                 lines.append(line)
         for line in lines:
             instr_I = Read_File.decode(line, labels)
+            if instr_I == Error.LabelUsedButNoDefine:
+                return Error.LabelUsedButNoDefine, line
             instr_Is.append(instr_I)
         return instr_Is, pc
 
@@ -77,7 +80,7 @@ class Read_File:
             if labelTable.get(strList[3]):
                 imm = labelTable.get(strList[3])
             else:
-                return "Error"
+                return Error.LabelUsedButNoDefine
         else:
             imm = int(strList[3])
         return Instr_I(instr, op, 0, rs1, rs2, imm)

@@ -19,14 +19,19 @@ def main():
 
 def process(m_state):
     # read the assembly file
-    print("Please input the risc-v assembly file:")
+    print("Please input the risc-v assembly file: (input q to exit)")
     showTrack = False
     fileName = input().strip()
+    if fileName == 'q':
+        return False
     instrs, pc = Read_File.file_decode(fileName)
     m_state.pc = pc
     if instrs == Error.FileNotFound:
         print("The input file is not exist.")
-        return 1
+        return True
+    if instrs == Error.LabelUsedButNoDefine:
+        print("There is a Label used but not define at \n   \"" + pc + "\"")
+        return True
 
     print("Do you want to show the machine state every step?(Y/N)")
     ch = input().strip()
@@ -50,9 +55,9 @@ def process(m_state):
     print("Continue?(Y/N)")
     ch = input().strip()
     if ch == 'Y':
-        return 1
+        return True
     else:
-        return 0
+        return False
 
 
 if __name__ == '__main__':
