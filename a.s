@@ -1,6 +1,6 @@
-add x1, x2, x3
-add x3, x4, x5
-L: 
-add x3, x5, x5
+addi x1, x0, 9
+add x2, x0, x1
+beq x1, x2, L1
+addi x3, x0, 19
 L1:
-add x4, x5, x5
+add x2, x1, x2

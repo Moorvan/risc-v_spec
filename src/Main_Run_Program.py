@@ -28,18 +28,21 @@ def process(m_state):
         print("The input file is not exist.")
         return 1
 
-    print("Do you want to show the machine state every step?(Y/N")
+    print("Do you want to show the machine state every step?(Y/N)")
     ch = input().strip()
     if ch == 'Y':
         showTrack = True
 
     while m_state.pc < len(instrs):
-        cur_instr = instrs[m_state.pc]
+        cur_pc = m_state.pc
+        cur_instr = instrs[cur_pc]
         cur_instr.execute(m_state)
 
         if showTrack:
-            print(cur_instr.print_instr())
+            print("pc:" + str(cur_pc) + " ", end='')
+            cur_instr.print_instr()
             m_state.printState()
+            print()
 
     if not showTrack:
         m_state.printState()
