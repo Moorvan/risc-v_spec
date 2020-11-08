@@ -10,7 +10,7 @@ class Machine_State:
 
     def printState(self):
         print("==============Machine State================")
-        print("PC Reg:" + " " + str(self.pc) + "\n")
+        print("PC Reg:" + " " + "0x%x" % self.pc + "\n")
         print("GPR File:")
         self.gprs.print_regs()
         print()
