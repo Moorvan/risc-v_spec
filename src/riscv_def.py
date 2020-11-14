@@ -21,6 +21,21 @@ class RISCV_OPCODE:
 
 
 class RISCV_FUNCT3:
+    # OPCODE.LOAD
+    LB = 0x0
+    LH = 0x1
+    LW = 0x2
+    LD = 0x3
+    LBU = 0x4
+    LHU = 0x5
+    LWU = 0x6
+
+    # OPCODE.STORE
+    SB = 0x0
+    SH = 0x1
+    SW = 0x2
+    SD = 0x3
+
     # OPCODE.JALR
     JALR = 0x0
 

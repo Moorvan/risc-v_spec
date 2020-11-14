@@ -10,6 +10,28 @@ class ALU:
         return a != b
 
     @classmethod
+    def alu_lt(cls, a, b):
+        return a < b
+
+    @classmethod
+    def alu_ge(cls, a, b):
+        return a >= b
+
+    @classmethod
+    def alu_ltu(cls, a, b):
+        mask = 0xffff_ffff_ffff_ffff
+        ua = a & mask
+        ub = b & mask
+        return ua < ub
+
+    @classmethod
+    def alu_geu(cls, a, b):
+        mask = 0xffff_ffff_ffff_ffff
+        ua = a & mask
+        ub = b & mask
+        return ua >= ub
+
+    @classmethod
     def alu_add(cls, a, b):
         return a + b
 
@@ -31,5 +53,5 @@ class ALU:
 
 
 if __name__ == '__main__':
-    if ALU.alu_ne(1, 3):
-        print("1 != 3")
+    if ALU.alu_ltu(100, -1):
+        print("YES")

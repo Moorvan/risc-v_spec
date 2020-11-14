@@ -35,6 +35,31 @@ class Instr_I:
             self._op = self._LUI
         elif self._opcode == RISCV_OPCODE.JAL:
             self._op = self._JAL
+        elif self._opcode == RISCV_OPCODE.JALR and self._funct3 == RISCV_FUNCT3.JALR:
+            self._op = self._JALR
+        elif self._opcode == RISCV_OPCODE.BRANCH:
+            if self._funct3 == RISCV_FUNCT3.BEQ:
+                self._op = self._BEQ
+            elif self._funct3 == RISCV_FUNCT3.BNE:
+                self._op = self._BNE
+            elif self._funct3 == RISCV_FUNCT3.BLT:
+                self._op = self._BLT
+            elif self._funct3 == RISCV_FUNCT3.BGE:
+                self._op = self._BGE
+            elif self._funct3 == RISCV_FUNCT3.BLTU:
+                self._op = self._BLTU
+            elif self._funct3 == RISCV_FUNCT3.BGEU:
+                self._op = self._BGEU
+        elif self._opcode == RISCV_OPCODE.LOAD:
+            if self._funct3 == RISCV_FUNCT3.LB:
+                self._op = self._LB
+            elif self._funct3 == RISCV_FUNCT3.LH:
+                self._op = self._LH
+            elif self._funct3 == RISCV_FUNCT3.LW:
+                self._op = self._LW
+            elif self._funct3 == RISCV_FUNCT3.LD:
+                self._op = self._LD
+
         elif self._opcode == RISCV_OPCODE.OP:
             if self._funct3 == RISCV_FUNCT3.ADD and self._funct7 == RISCV_FUNCT7.ADD:
                 self._op = self._ADD
@@ -60,6 +85,39 @@ class Instr_I:
     def _JAL(self, m_state):
         Instr_I.exec_JAL(False, self._rd, self._imm21_J, m_state)
 
+    def _JALR(self, m_state):
+        Instr_I.exec_JALR(False, self._rd, self._rs1, self._imm12_I, m_state)
+
+    def _BEQ(self, m_state):
+        Instr_I.exec_BRANCH(ALU.alu_eq, False, self._rs1, self._rs2, self._imm13_B, m_state)
+
+    def _BNE(self, m_state):
+        Instr_I.exec_BRANCH(ALU.alu_ne, False, self._rs1, self._rs2, self._imm13_B, m_state)
+
+    def _BLT(self, m_state):
+        Instr_I.exec_BRANCH(ALU.alu_lt, False, self._rs1, self._rs2, self._imm13_B, m_state)
+
+    def _BGE(self, m_state):
+        Instr_I.exec_BRANCH(ALU.alu_ge, False, self._rs1, self._rs2, self._imm13_B, m_state)
+
+    def _BLTU(self, m_state):
+        Instr_I.exec_BRANCH(ALU.alu_ltu, False, self._rs1, self._rs2, self._imm13_B, m_state)
+
+    def _BGEU(self, m_state):
+        Instr_I.exec_BRANCH(ALU.alu_geu, False, self._rs1, self._rs2, self._imm13_B, m_state)
+
+    def _LB(self, m_state):
+        Instr_I.exec_LOAD(False, self._rd, self._rs1, self._imm12_I, self._funct3, m_state)
+
+    def _LH(self, m_state):
+        Instr_I.exec_LOAD(False, self._rd, self._rs1, self._imm12_I, self._funct3, m_state)
+
+    def _LW(self, m_state):
+        Instr_I.exec_LOAD(False, self._rd, self._rs1, self._imm12_I, self._funct3, m_state)
+
+    def _LD(self, m_state):
+        Instr_I.exec_LOAD(False, self._rd, self._rs1, self._imm12_I, self._funct3, m_state)
+
     def _ADD(self, m_state):
         Instr_I.exec_OP(ALU.alu_add, False, self._rd, self._rs1, self._rs2, m_state)
 
@@ -71,9 +129,6 @@ class Instr_I:
 
     def _SD(self, m_state):
         Instr_I.exec_STORE(False, self._rs1, self._rs2, self._imm12_S, self._funct3, m_state)
-
-    def _BEQ(self, m_state):
-        Instr_I.exec_BRANCH(ALU.alu_eq, False, self._rs1, self._rs2, self._imm13_B, m_state)
 
     @classmethod
     def exec_AUIPC(cls, is_C, rd, imm20, m_state):
@@ -115,6 +170,21 @@ class Instr_I:
     def exec_OP_IMM(cls, alu_op, is_C, rd, rs1, imm12, m_state):
         rs1_val = m_state.gprs.get_reg(rs1)
         rd_val = alu_op(rs1_val, imm12)
+        Instr_Common.finish_rd_and_pc_incr(rd, rd_val, is_C, m_state)
+
+    @classmethod
+    def exec_LOAD(cls, is_C, rd, rs1, imm12, funct3, m_state):
+        # Compute effective address
+        rs1_val = m_state.gprs.get_reg(rs1)
+        addr = ALU.alu_add(rs1_val, imm12)
+
+        res = m_state.mem.get_mem(addr)
+        if funct3 == RISCV_FUNCT3.LBU or funct3 == RISCV_FUNCT3.LHU or funct3 == RISCV_FUNCT3.LWU:
+            mask = 0xffff_ffff_ffff_ffff
+            rd_val = res & mask
+        else:
+            rd_val = res
+
         Instr_Common.finish_rd_and_pc_incr(rd, rd_val, is_C, m_state)
 
     @classmethod
