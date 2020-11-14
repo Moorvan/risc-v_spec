@@ -1,4 +1,5 @@
 from riscv_def import *
+from Instr_I import *
 
 
 # This class defines part of the RISC-V 'C' (Compressed) instructions.
@@ -44,31 +45,36 @@ class Instr_C:
         self._op(m_state)
 
     def _C_SUB(self, m_state):
-        pass
+        Instr_I.exec_OP(ALU.alu_sub, True, self._rd_rs1_CA, self._rd_rs1_CA, self._rs2_CA, m_state)
 
     def _C_XOR(self, m_state):
-        pass
+        Instr_I.exec_OP(ALU.alu_xor, True, self._rd_rs1_CA, self._rd_rs1_CA, self._rs2_CA, m_state)
 
     def _C_OR(self, m_state):
-        pass
+        Instr_I.exec_OP(ALU.alu_or, True, self._rd_rs1_CA, self._rd_rs1_CA, self._rs2_CA, m_state)
 
     def _C_AND(self, m_state):
-        pass
+        Instr_I.exec_OP(ALU.alu_and, True, self._rd_rs1_CA, self._rd_rs1_CA, self._rs2_CA, m_state)
 
     def _C_JR(self, m_state):
-        pass
+        rd = 0
+        imm12 = 0
+        Instr_I.exec_JALR(True, rd, self._rd_rs1_CR, imm12, m_state)
 
     def _C_MV(self, m_state):
-        pass
+        rs1 = 0
+        Instr_I.exec_OP(ALU.alu_add, True, self._rd_rs1_CR, rs1, self._rs2_CR, m_state)
 
     def _C_EBREAK(self, m_state):
         pass
 
     def _C_JALR(self, m_state):
-        pass
+        rd = 1
+        imm12 = 0
+        Instr_I.exec_JALR(True, rd, self._rd_rs1_CR, imm12, m_state)
 
     def _C_ADD(self, m_state):
-        pass
+        Instr_I.exec_OP(ALU.alu_add, True, self._rd_rs1_CR, self._rd_rs1_CR, m_state)
 
 
 if __name__ == '__main__':

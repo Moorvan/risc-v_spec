@@ -35,7 +35,7 @@
       <recent name="C:\Documents\study\chisel-riscv\risc-v_spec\src\FPR_File" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Program">
+  <component name="RunManager" selected="Python.Instr_C">
     <configuration name="Instr_C" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="risc-v_spec" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -148,9 +148,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Instr_C" />
         <item itemvalue="Python.Program" />
         <item itemvalue="Python.Instr_I" />
-        <item itemvalue="Python.Instr_C" />
         <item itemvalue="Python.Read_ELF_file (1)" />
         <item itemvalue="Python.Main" />
       </list>
@@ -191,7 +191,14 @@
       <workItem from="1603459933237" duration="994000" />
       <workItem from="1603598215098" duration="52688000" />
       <workItem from="1604074319027" duration="31197000" />
-      <workItem from="1604828698137" duration="149000" />
+      <workItem from="1604828698137" duration="3189000" />
+      <workItem from="1604997497046" duration="2453000" />
+      <workItem from="1605092499083" duration="91000" />
+      <workItem from="1605092685350" duration="80000" />
+      <workItem from="1605158723527" duration="625000" />
+      <workItem from="1605258229504" duration="15865000" />
+      <workItem from="1605336584303" duration="609000" />
+      <workItem from="1605350230696" duration="2110000" />
     </task>
     <servers />
   </component>
@@ -199,6 +206,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="361" y="76" key="#Updates" timestamp="1605092538750">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="361" y="76" key="#Updates/0.0.1536.834@0.0.1536.834" timestamp="1605092538750" />
     <state x="575" y="260" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1603614954395">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
@@ -209,26 +220,26 @@
     </state>
     <state x="592" y="222" key="FileChooserDialogImpl/0.0.1536.834@0.0.1536.834" timestamp="1603614896302" />
     <state x="740" y="280" key="FileChooserDialogImpl/0.0.1920.1050@0.0.1920.1050" timestamp="1602049930588" />
-    <state width="1493" height="301" key="GridCell.Tab.0.bottom" timestamp="1604624107374">
-      <screen x="0" y="0" width="1536" height="834" />
+    <state width="1877" height="104" key="GridCell.Tab.0.bottom" timestamp="1605274941359">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1493" height="301" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1604624107374" />
-    <state width="1877" height="150" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1602133294958" />
-    <state width="1493" height="301" key="GridCell.Tab.0.center" timestamp="1604624107373">
-      <screen x="0" y="0" width="1536" height="834" />
+    <state width="1877" height="104" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1605274941359" />
+    <state width="1877" height="104" key="GridCell.Tab.0.center" timestamp="1605274941359">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1493" height="301" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1604624107373" />
-    <state width="1877" height="150" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1602133294958" />
-    <state width="1493" height="301" key="GridCell.Tab.0.left" timestamp="1604624107373">
-      <screen x="0" y="0" width="1536" height="834" />
+    <state width="1877" height="104" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1605274941359" />
+    <state width="1877" height="104" key="GridCell.Tab.0.left" timestamp="1605274941359">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1493" height="301" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1604624107373" />
-    <state width="1877" height="150" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1602133294958" />
-    <state width="1493" height="301" key="GridCell.Tab.0.right" timestamp="1604624107374">
-      <screen x="0" y="0" width="1536" height="834" />
+    <state width="1877" height="104" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1605274941359" />
+    <state width="1877" height="104" key="GridCell.Tab.0.right" timestamp="1605274941359">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1493" height="301" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1604624107374" />
-    <state width="1877" height="150" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1602133294958" />
+    <state width="1877" height="104" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1605274941359" />
     <state width="1493" height="455" key="GridCell.Tab.1.bottom" timestamp="1604066844844">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
@@ -263,7 +274,7 @@
     <SUITE FILE_PATH="coverage/risc_v_spec$Main_Run_Program.coverage" NAME="Main_Run_Program Coverage Results" MODIFIED="1603453130944" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/risc_v_spec$Main.coverage" NAME="Main Coverage Results" MODIFIED="1604053614867" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/risc_v_spec$pytest.coverage" NAME="pytest Coverage Results" MODIFIED="1602049083906" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
-    <SUITE FILE_PATH="coverage/risc_v_spec$Instr_C.coverage" NAME="Instr_C Coverage Results" MODIFIED="1604623833915" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/risc_v_spec$Instr_C.coverage" NAME="Instr_C Coverage Results" MODIFIED="1605264719218" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/risc_v_spec$ReadHexFIle.coverage" NAME="ReadHexFIle Coverage Results" MODIFIED="1603960719768" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/risc_v_spec$Read_File.coverage" NAME="Read_File Coverage Results" MODIFIED="1602750336615" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/risc_v_spec$Program.coverage" NAME="Program Coverage Results" MODIFIED="1604624107361" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />

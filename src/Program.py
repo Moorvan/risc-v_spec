@@ -15,7 +15,7 @@ class Program:
             instr_C = Instr_C(instr)
             instr_C.execute(self._m_state)
         else:
-            instr_I = Instr_I(instr)
+            instr_I = Instr_I(instr, False)
             instr_I.execute(self._m_state)
 
     def print_info(self):
