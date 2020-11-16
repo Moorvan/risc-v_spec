@@ -22,18 +22,28 @@ class Instr_I:
 
         self._imm12_I = Bit_Utils.bit_slice(self._instr, 31, 25)
 
-        self._imm12_S = (Bit_Utils.bit_slice(self._instr, 31, 25) << 5) | Bit_Utils.bit_slice(self._instr, 11, 7)
-        self._imm13_B = (Bit_Utils.bit_slice(self._instr, 31, 31) << 12) | (Bit_Utils.bit_slice(self._instr, 30, 25) << 5) | (Bit_Utils.bit_slice(self._instr, 11, 8) << 1) | (Bit_Utils.bit_slice(self._instr, 7, 7) << 11)
-        self._imm21_J = (Bit_Utils.bit_slice(self._instr, 31, 31) << 20) | (Bit_Utils.bit_slice(self._instr, 30, 21) << 1) | (Bit_Utils.bit_slice(self._instr, 20, 20) << 11) | (Bit_Utils.bit_slice(self._instr, 19, 12) << 12)
+        self._imm12_S = (Bit_Utils.bit_slice(self._instr, 31, 25) << 5) | \
+                        (Bit_Utils.bit_slice(self._instr, 11, 7))
+        self._imm13_B = (Bit_Utils.bit_slice(self._instr, 31, 31) << 12) | \
+                        (Bit_Utils.bit_slice(self._instr, 30, 25) << 5) | \
+                        (Bit_Utils.bit_slice(self._instr, 11, 8) << 1) | \
+                        (Bit_Utils.bit_slice(self._instr, 7, 7) << 11)
+        self._imm21_J = (Bit_Utils.bit_slice(self._instr, 31, 31) << 20) | \
+                        (Bit_Utils.bit_slice(self._instr, 30, 21) << 1) | \
+                        (Bit_Utils.bit_slice(self._instr, 20, 20) << 11) | \
+                        (Bit_Utils.bit_slice(self._instr, 19, 12) << 12)
         self._imm20_U = Bit_Utils.bit_slice(self._instr, 31, 12)
 
         # for SLLI/SRLI/SRAI
-        self._msbs6 = self._instr >> 26 & 0x3f
-        if self._msbs6 == RISCV_OTHER.msbs6_SLLI or self._msbs6 == RISCV_OTHER.msbs6_SRLI or self._msbs6 == RISCV_OTHER.msbs6_SRAI:
+        self._msbs6 = Bit_Utils.bit_slice(self._instr, 31, 26)
+        if self._msbs6 == RISCV_OTHER.msbs6_SLLI or \
+           self._msbs6 == RISCV_OTHER.msbs6_SRLI or \
+           self._msbs6 == RISCV_OTHER.msbs6_SRAI:
             self._shamt_ok = True
         else:
             self._shamt_ok = False
-        self._shamt = self._instr >> 20 & 0x3f
+        self._shamt = Bit_Utils.bit_slice(self._instr, 25, 20)
+        self._shamt5 = Bit_Utils.bit_slice(self._instr, 24, 20)
 
         self._op = self._ADD
         if self._opcode == RISCV_OPCODE.AUIPC:
@@ -101,12 +111,46 @@ class Instr_I:
             elif self._funct3 == RISCV_FUNCT3.SRAI and self._msbs6 == RISCV_OTHER.msbs6_SRAI and self._shamt_ok:
                 self._op = self._SRAI
         elif self._opcode == RISCV_OPCODE.OP_IMM_32:
-            pass
+            if self._funct3 == RISCV_FUNCT3.ADDIW:
+                self._op = self._ADDIW
+            elif self._funct3 == RISCV_FUNCT3.SLLIW and self._funct7 == RISCV_FUNCT7.SLLIW:
+                self._op = self._SLLIW
+            elif self._funct3 == RISCV_FUNCT3.SRLIW and self._funct7 == RISCV_FUNCT7.SRLIW:
+                self._op = self._SRLIW
+            elif self._funct3 == RISCV_FUNCT3.SRAIW and self._funct7 == RISCV_FUNCT7.SRAIW:
+                self._op = self._SRAIW
         elif self._opcode == RISCV_OPCODE.OP:
             if self._funct3 == RISCV_FUNCT3.ADD and self._funct7 == RISCV_FUNCT7.ADD:
                 self._op = self._ADD
             elif self._funct3 == RISCV_FUNCT3.SUB and self._funct7 == RISCV_FUNCT7.SUB:
                 self._op = self._SUB
+            elif self._funct3 == RISCV_FUNCT3.SLL and self._funct7 == RISCV_FUNCT7.SLL:
+                self._op = self._SLL
+            elif self._funct3 == RISCV_FUNCT3.SLT and self._funct7 == RISCV_FUNCT7.SLT:
+                self._op = self._SLT
+            elif self._funct3 == RISCV_FUNCT3.SLTU and self._funct7 == RISCV_FUNCT7.SLTU:
+                self._op = self._SLTU
+            elif self._funct3 == RISCV_FUNCT3.XOR and self._funct7 == RISCV_FUNCT7.XOR:
+                self._op = self._XOR
+            elif self._funct3 == RISCV_FUNCT3.SRL and self._funct7 == RISCV_FUNCT7.SRL:
+                self._op = self._SRL
+            elif self._funct3 == RISCV_FUNCT3.SRA and self._funct7 == RISCV_FUNCT7.SRA:
+                self._op = self._SRA
+            elif self._funct3 == RISCV_FUNCT3.OR and self._funct7 == RISCV_FUNCT7.OR:
+                self._op = self._OR
+            elif self._funct3 == RISCV_FUNCT3.AND and self._funct7 == RISCV_FUNCT7.AND:
+                self._op = self._AND
+        elif self._opcode == RISCV_OPCODE.OP_32:
+            if self._funct3 == RISCV_FUNCT3.ADDW and self._funct7 == RISCV_FUNCT7.ADDW:
+                self._op = self._ADDW
+            elif self._funct3 == RISCV_FUNCT3.SUBW and self._funct7 == RISCV_FUNCT7.SUBW:
+                self._op = self._SUBW
+            elif self._funct3 == RISCV_FUNCT3.SLLW and self._funct7 == RISCV_FUNCT7.SLLW:
+                self._op = self._SLLW
+            elif self._funct3 == RISCV_FUNCT3.SRLW and self._funct7 == RISCV_FUNCT7.SRLW:
+                self._op = self._SRLW
+            elif self._funct3 == RISCV_FUNCT3.SRAW and self._funct7 == RISCV_FUNCT7.SRAW:
+                self._op = self._SRAW
         print(self._op)
 
     # this function can change the input machine state after executing the instruction
@@ -204,11 +248,63 @@ class Instr_I:
     def _SRAI(self, m_state):
         Instr_I.exec_OP_IMM(ALU.alu_sra, False, self._rd, self._rs1, self._shamt, m_state)
 
+    def _ADDIW(self, m_state):
+        Instr_I.exec_OP_IMM_32(ALU.alu_addw, False, self._rd, self._rs1, Bit_Utils.get_signed(12, self._imm12_I),
+                               m_state)
+
+    def _SLLIW(self, m_state):
+        Instr_I.exec_OP_IMM_32(ALU.alu_sllw, False, self._rd, self._rs1, self._shamt5, m_state)
+
+    def _SRLIW(self, m_state):
+        Instr_I.exec_OP_IMM_32(ALU.alu_srlw, False, self._rd, self._rs1, self._shamt5, m_state)
+
+    def _SRAIW(self, m_state):
+        Instr_I.exec_OP_IMM_32(ALU.alu_sraw, False, self._rd, self._rs1, self._shamt5, m_state)
+
     def _ADD(self, m_state):
         Instr_I.exec_OP(ALU.alu_add, False, self._rd, self._rs1, self._rs2, m_state)
 
     def _SUB(self, m_state):
         Instr_I.exec_OP(ALU.alu_sub, False, self._rd, self._rs1, self._rs2, m_state)
+
+    def _SLT(self, m_state):
+        Instr_I.exec_OP(ALU.alu_slt, False, self._rd, self._rs1, self._rs2, m_state)
+
+    def _SLTU(self, m_state):
+        Instr_I.exec_OP(ALU.alu_sltu, False, self._rd, self._rs1, self._rs2, m_state)
+
+    def _XOR(self, m_state):
+        Instr_I.exec_OP(ALU.alu_xor, False, self._rd, self._rs1, self._rs2, m_state)
+
+    def _OR(self, m_state):
+        Instr_I.exec_OP(ALU.alu_or, False, self._rd, self._rs1, self._rs2, m_state)
+
+    def _AND(self, m_state):
+        Instr_I.exec_OP(ALU.alu_and, False, self._rd, self._rs1, self._rs2, m_state)
+
+    def _SLL(self, m_state):
+        Instr_I.exec_OP(ALU.alu_sll, False, self._rd, self._rs1, self._rs2, m_state)
+
+    def _SRL(self, m_state):
+        Instr_I.exec_OP(ALU.alu_srl, False, self._rd, self._rs1, self._rs2, m_state)
+
+    def _SRA(self, m_state):
+        Instr_I.exec_OP(ALU.alu_sra, False, self._rd, self._rs1, self._rs2, m_state)
+
+    def _ADDW(self, m_state):
+        Instr_I.exec_OP_32(ALU.alu_addw, False, self._rd, self._rs1, self._rs2, m_state)
+
+    def _SUBW(self, m_state):
+        Instr_I.exec_OP_32(ALU.alu_subw, False, self._rd, self._rs1, self._rs2, m_state)
+
+    def _SLLW(self, m_state):
+        Instr_I.exec_OP_32(ALU.alu_sllw, False, self._rd, self._rs1, self._rs2, m_state)
+
+    def _SRLW(self, m_state):
+        Instr_I.exec_OP_32(ALU.alu_srlw, False, self._rd, self._rs1, self._rs2, m_state)
+
+    def _SRAW(self, m_state):
+        Instr_I.exec_OP_32(ALU.alu_sraw, False, self._rd, self._rs1, self._rs2, m_state)
 
     @classmethod
     def exec_AUIPC(cls, is_C, rd, imm20, m_state):
@@ -248,10 +344,23 @@ class Instr_I:
         Instr_Common.finish_rd_and_pc_incr(rd, rd_val, is_C, m_state)
 
     @classmethod
+    def exec_OP_32(cls, alu_op, is_C, rd, rs1, rs2, m_state):
+        rs1_val = m_state.gprs.get_reg(rs1)
+        rs2_val = m_state.gprs.get_reg(rs2)
+        rd_val = alu_op(rs1_val, rs2_val)
+        Instr_Common.finish_rd_and_pc_incr(rd, rd_val, is_C, m_state)
+
+    @classmethod
     def exec_OP_IMM(cls, alu_op, is_C, rd, rs1, imm12, m_state):
         rs1_val = m_state.gprs.get_reg(rs1)
         s_imm = Bit_Utils.get_signed(12, imm12)
         rd_val = alu_op(rs1_val, s_imm)
+        Instr_Common.finish_rd_and_pc_incr(rd, rd_val, is_C, m_state)
+
+    @classmethod
+    def exec_OP_IMM_32(cls, alu_op, is_C, rd, rs1, v2, m_state):
+        rs1_val = m_state.gprs.get_reg(rs1)
+        rd_val = alu_op(rs1_val, v2)
         Instr_Common.finish_rd_and_pc_incr(rd, rd_val, is_C, m_state)
 
     @classmethod

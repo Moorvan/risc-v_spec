@@ -76,6 +76,13 @@ class RISCV_FUNCT3:
     SRL = 0x5
     SRA = 0x5
 
+    # OPCODE.OP_32
+    ADDW = 0x0
+    SUBW = 0x0
+    SLLW = 0x1
+    SRLW = 0x5
+    SRAW = 0x5
+
     # C
     C_LW = 0x2
     C_LD = 0x3
@@ -87,7 +94,12 @@ class RISCV_FUNCT3:
     C_BNEZ = 0x7
     C_LI = 0x2
     C_LUI = 0x3
+
+    C_NOP = 0x0
     C_ADDI = 0x0
+    C_ADDIW = 0x1
+    C_ADDI16SP = 0x3
+    C_ADDI4SPN = 0x0
     C_SLLI = 0x0
     C_SRLI = 0x4
     C_ANDI = 0x4
@@ -110,6 +122,13 @@ class RISCV_FUNCT7:
     SLL = 0x00
     SRL = 0x00
     SRA = 0x20
+
+    # OPCODE.OP_32
+    ADDW = 0x00
+    SUBW = 0x20
+    SLLW = 0x00
+    SRLW = 0x00
+    SRAW = 0x20
 
 
 class RISCV_OTHER:

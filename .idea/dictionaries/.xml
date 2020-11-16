@@ -3,8 +3,10 @@
     <words>
       <w>auipc</w>
       <w>jalr</w>
+      <w>msbs</w>
       <w>opcode</w>
       <w>riscv</w>
+      <w>shamt</w>
     </words>
   </dictionary>
 </component>

@@ -14,6 +14,32 @@ class Instr_C:
         self._rd_rs1_CR = Bit_Utils.bit_slice(self._instr, 11, 7)
         self._rs2_CR = Bit_Utils.bit_slice(self._instr, 6, 2)
 
+        # CI format
+        self._rd_rs1_CI = Bit_Utils.bit_slice(self._instr, 11, 7)
+        self._imm6_CI = (Bit_Utils.bit_slice(self._instr, 12, 12) << 5) | \
+                        (Bit_Utils.bit_slice(self._instr, 6, 2))
+        self._imm8_CI = (Bit_Utils.bit_slice(self._instr, 12, 12) << 5) | \
+                        (Bit_Utils.bit_slice(self._instr, 6, 4) << 2) | \
+                        (Bit_Utils.bit_slice(self._instr, 3, 2) << 6)
+        self._imm9_CI = (Bit_Utils.bit_slice(self._instr, 12, 12) << 5) | \
+                        (Bit_Utils.bit_slice(self._instr, 6, 5) << 3) | \
+                        (Bit_Utils.bit_slice(self._instr, 4, 2) << 6)
+        self._imm10_CI = (Bit_Utils.bit_slice(self._instr, 12, 12) << 5) | \
+                         (Bit_Utils.bit_slice(self._instr, 6, 6) << 4) | \
+                         (Bit_Utils.bit_slice(self._instr, 5, 2) << 6)
+        self._nzimm10_CI = (Bit_Utils.bit_slice(self._instr, 12, 12) << 9) | \
+                           (Bit_Utils.bit_slice(self._instr, 6, 6) << 4) | \
+                           (Bit_Utils.bit_slice(self._instr, 5, 5) << 6) | \
+                           (Bit_Utils.bit_slice(self._instr, 4, 3) << 7) | \
+                           (Bit_Utils.bit_slice(self._instr, 2, 2) << 5)
+
+        # CIW format
+        self._rd_CIW = (0x8 | Bit_Utils.bit_slice(self._instr, 4, 2))
+        self._nzuimm10_CIW = (Bit_Utils.bit_slice(self._instr, 12, 11) << 4) |\
+                             (Bit_Utils.bit_slice(self._instr, 10, 7) << 6) |\
+                             (Bit_Utils.bit_slice(self._instr, 6, 6) << 2) |\
+                             (Bit_Utils.bit_slice(self._instr, 5, 5) << 3)
+
         # CA format
         self._funct6_CA = Bit_Utils.bit_slice(self._instr, 15, 10)
         self._rd_rs1_CA = 0x8 | Bit_Utils.bit_slice(self._instr, 9, 7)
@@ -21,7 +47,10 @@ class Instr_C:
         self._rs2_CA = 0x8 | Bit_Utils.bit_slice(self._instr, 4, 2)
 
         self._op = self._C_ADD
-        if self._opcode == RISCV_OPCODE.C1:
+        if self._opcode == RISCV_OPCODE.C0:
+            if self._funct3 == RISCV_FUNCT3.C_ADDI4SPN and self._nzuimm10_CIW != 0:
+                pass
+        elif self._opcode == RISCV_OPCODE.C1:
             if self._funct6_CA == RISCV_OTHER.FUNCT6_C_SUB and self._funct2_CA == RISCV_OTHER.FUNCT2_C_SUB:
                 self._op = self._C_SUB
             elif self._funct6_CA == RISCV_OTHER.FUNCT6_C_XOR and self._funct2_CA == RISCV_OTHER.FUNCT2_C_XOR:

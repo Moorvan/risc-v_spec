@@ -39,8 +39,20 @@ class ALU:
         return a + b
 
     @classmethod
+    def alu_addw(cls, a, b):
+        sa = Bit_Utils.get_signed(32, a)
+        sb = Bit_Utils.get_signed(32, b)
+        return Bit_Utils.get_signed(32, sa + sb)
+
+    @classmethod
     def alu_sub(cls, a, b):
         return a - b
+
+    @classmethod
+    def alu_subw(cls, a, b):
+        sa = Bit_Utils.get_signed(32, a)
+        sb = Bit_Utils.get_signed(32, b)
+        return Bit_Utils.get_signed(32, sa - sb)
 
     @classmethod
     def alu_slt(cls, a, b):
@@ -118,4 +130,4 @@ class ALU:
 
 
 if __name__ == '__main__':
-    print("%d" % ALU.alu_sraw(-1, 1))
+    print("%d" % ALU.alu_addw(-1, -1))

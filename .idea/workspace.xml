@@ -28,7 +28,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop/riscv-python-model-master" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -124,7 +124,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Program" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="sypu" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="risc-v_spec" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -137,7 +137,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/Program.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/sypu.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -149,10 +149,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.Instr_C" />
+        <item itemvalue="Python.sypu" />
         <item itemvalue="Python.Instr_I" />
-        <item itemvalue="Python.Bit_Utils" />
         <item itemvalue="Python.ALU" />
-        <item itemvalue="Python.Program" />
+        <item itemvalue="Python.Bit_Utils" />
       </list>
     </recent_temporary>
   </component>
@@ -200,7 +200,7 @@
       <workItem from="1605336584303" duration="609000" />
       <workItem from="1605350230696" duration="9475000" />
       <workItem from="1605431820355" duration="13479000" />
-      <workItem from="1605499445958" duration="800000" />
+      <workItem from="1605499445958" duration="13655000" />
     </task>
     <servers />
   </component>
@@ -217,31 +217,35 @@
     </state>
     <state x="575" y="260" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.834@0.0.1536.834" timestamp="1603614954395" />
     <state x="719" y="327" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1602049514426" />
+    <state x="765" y="240" key="#com.intellij.ide.util.MemberChooser" timestamp="1605545083364">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="765" y="240" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1605545083364" />
     <state x="592" y="222" key="FileChooserDialogImpl" timestamp="1603614896302">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="592" y="222" key="FileChooserDialogImpl/0.0.1536.834@0.0.1536.834" timestamp="1603614896302" />
     <state x="740" y="280" key="FileChooserDialogImpl/0.0.1920.1050@0.0.1920.1050" timestamp="1602049930588" />
-    <state width="1877" height="31" key="GridCell.Tab.0.bottom" timestamp="1605500241366">
+    <state width="1877" height="255" key="GridCell.Tab.0.bottom" timestamp="1605545919062">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1493" height="301" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1604624107374" />
-    <state width="1877" height="31" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1605500241366" />
-    <state width="1877" height="31" key="GridCell.Tab.0.center" timestamp="1605500241365">
+    <state width="1877" height="255" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1605545919062" />
+    <state width="1877" height="255" key="GridCell.Tab.0.center" timestamp="1605545919062">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1493" height="301" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1604624107373" />
-    <state width="1877" height="31" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1605500241365" />
-    <state width="1877" height="31" key="GridCell.Tab.0.left" timestamp="1605500241365">
+    <state width="1877" height="255" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1605545919062" />
+    <state width="1877" height="255" key="GridCell.Tab.0.left" timestamp="1605545919062">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1493" height="301" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1604624107373" />
-    <state width="1877" height="31" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1605500241365" />
-    <state width="1877" height="31" key="GridCell.Tab.0.right" timestamp="1605500241365">
+    <state width="1877" height="255" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1605545919062" />
+    <state width="1877" height="255" key="GridCell.Tab.0.right" timestamp="1605545919062">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1493" height="301" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1604624107374" />
-    <state width="1877" height="31" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1605500241365" />
+    <state width="1877" height="255" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1605545919062" />
     <state width="1493" height="455" key="GridCell.Tab.1.bottom" timestamp="1604066844844">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
@@ -258,37 +262,39 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state width="1493" height="455" key="GridCell.Tab.1.right/0.0.1536.834@0.0.1536.834" timestamp="1604066844844" />
-    <state x="270" y="59" key="SettingsEditor" timestamp="1603459278807">
-      <screen x="0" y="0" width="1536" height="834" />
+    <state x="338" y="74" key="SettingsEditor" timestamp="1605500399411">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="270" y="59" key="SettingsEditor/0.0.1536.834@0.0.1536.834" timestamp="1603459278807" />
+    <state x="338" y="74" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1605500399411" />
     <state x="447" y="16" width="642" height="801" key="find.popup" timestamp="1602819458100">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="447" y="16" width="642" height="801" key="find.popup/0.0.1536.834@0.0.1536.834" timestamp="1602819458100" />
-    <state x="498" y="180" width="672" height="539" key="search.everywhere.popup" timestamp="1604572593357">
-      <screen x="0" y="0" width="1536" height="834" />
+    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1605544660480">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="498" y="180" width="672" height="539" key="search.everywhere.popup/0.0.1536.834@0.0.1536.834" timestamp="1604572593357" />
-    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1602058588679" />
+    <state x="623" y="227" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1605544660480" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/risc_v_spec$Main_Run_Program.coverage" NAME="Main_Run_Program Coverage Results" MODIFIED="1603453130944" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/risc_v_spec$Bit_Utils.coverage" NAME="Bit_Utils Coverage Results" MODIFIED="1605459936898" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/risc_v_spec$Main.coverage" NAME="Main Coverage Results" MODIFIED="1604053614867" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/risc_v_spec$pytest.coverage" NAME="pytest Coverage Results" MODIFIED="1602049083906" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
-    <SUITE FILE_PATH="coverage/risc_v_spec$Instr_C.coverage" NAME="Instr_C Coverage Results" MODIFIED="1605500241351" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/risc_v_spec$Instr_C.coverage" NAME="Instr_C Coverage Results" MODIFIED="1605545919051" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/risc_v_spec$ReadHexFIle.coverage" NAME="ReadHexFIle Coverage Results" MODIFIED="1603960719768" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/risc_v_spec$Read_File.coverage" NAME="Read_File Coverage Results" MODIFIED="1602750336615" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/risc_v_spec$Program.coverage" NAME="Program Coverage Results" MODIFIED="1604624107361" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/risc_v_spec$sypu.coverage" NAME="sypu Coverage Results" MODIFIED="1605545650579" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/risc_v_spec$Read_ELF_fIle__1_.coverage" NAME="Read_ELF_fIle (1) Coverage Results" MODIFIED="1604043754931" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/risc_v_spec$b.coverage" NAME="b Coverage Results" MODIFIED="1602049735280" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/pac1" />
     <SUITE FILE_PATH="coverage/risc_v_spec$Memory.coverage" NAME="Memory Coverage Results" MODIFIED="1602239710487" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/risc_v_spec$riscv_def.coverage" NAME="riscv_def Coverage Results" MODIFIED="1604053473265" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/risc_v_spec$Read_ELF_file__1_.coverage" NAME="Read_ELF_file (1) Coverage Results" MODIFIED="1604561966168" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
-    <SUITE FILE_PATH="coverage/risc_v_spec$Instr_I.coverage" NAME="Instr_I Coverage Results" MODIFIED="1605499822031" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/risc_v_spec$Instr_I.coverage" NAME="Instr_I Coverage Results" MODIFIED="1605545531294" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/risc_v_spec$ReadELFFIle__1_.coverage" NAME="Read_ELF_fIle Coverage Results" MODIFIED="1604040599240" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/risc_v_spec$GPR_File.coverage" NAME="GPR_File Coverage Results" MODIFIED="1602053005011" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
-    <SUITE FILE_PATH="coverage/risc_v_spec$ALU.coverage" NAME="ALU Coverage Results" MODIFIED="1605457905860" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/risc_v_spec$ALU.coverage" NAME="ALU Coverage Results" MODIFIED="1605500948398" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>
