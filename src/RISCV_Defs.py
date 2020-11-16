@@ -58,6 +58,12 @@ class RISCV_FUNCT3:
     SRLI = 0x5
     SRAI = 0x5
 
+    # OPCODE.OP_IMM_32
+    ADDIW = 0x0
+    SLLIW = 0x1
+    SRLIW = 0x5
+    SRAIW = 0x5
+
     # OPCODE.OP
     ADD = 0x0
     SUB = 0x0
@@ -87,8 +93,12 @@ class RISCV_FUNCT3:
     C_ANDI = 0x4
 
 
-
 class RISCV_FUNCT7:
+    # OPCODE.OP_IMM_32
+    SLLIW = 0x00
+    SRLIW = 0x00
+    SRAIW = 0x20
+
     # OPCODE.OP
     ADD = 0x00
     SUB = 0x20
@@ -106,6 +116,11 @@ class RISCV_OTHER:
     # OPCODE.SYSTEM
     FUNCT12_ECALL = 0x000
     FUNCT12_EBREAK = 0x001
+
+    # for SLLI/SRLI/SRAI
+    msbs6_SLLI = 0x00
+    msbs6_SRLI = 0x00
+    msbs6_SRAI = 0x10
 
     # C
     FUNCT4_C_JR = 0x8

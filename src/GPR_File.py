@@ -8,12 +8,12 @@ class GPR_File:
     def __init__(self):
         self._regs = [0] * 32
 
-    def get_reg(self, n):
+    def get_reg(self, n: int):
         if n > 31 or n < 0:
             return Error.IllegalRegisterIndex
         return self._regs[n]
 
-    def set_reg(self, n, v):
+    def set_reg(self, n: int, v: int):
         if n == 0:
             return
         if n > 31 or n < 0:

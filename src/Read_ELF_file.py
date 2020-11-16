@@ -3,7 +3,7 @@ import struct
 elfHeader = {}
 
 
-def verify_elf(fileName):
+def verify_elf(fileName: str):
     f = open(fileName, "rb")
     magic = f.read(16)
     elfStr = chr(magic[1]) + chr(magic[2]) + chr(magic[3])
@@ -30,7 +30,7 @@ def verify_elf(fileName):
     return True
 
 
-def show_elfHeader(fileName):
+def show_elfHeader(fileName: str):
     if not verify_elf(fileName):
         return
     magic = elfHeader['magic']
@@ -74,7 +74,7 @@ def show_elfHeader(fileName):
     print("Section header string table index:  %d" % elfHeader['e_shstrndx'])
 
 
-def get_Instrs(fileName):
+def get_Instrs(fileName: str):
     if not verify_elf(fileName):
         return
     sec_start = elfHeader['e_shoff']

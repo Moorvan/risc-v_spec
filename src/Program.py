@@ -22,7 +22,7 @@ class Program:
         self._m_state.printState()
 
     @classmethod
-    def is_C(cls, instr):
+    def is_C(cls, instr: int):
         if instr & 0b11 == 0b11:
             return False
         return True

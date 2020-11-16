@@ -1,22 +1,24 @@
-from riscv_def import *
+from RISCV_Defs import *
 from Instr_I import *
 
 
 # This class defines part of the RISC-V 'C' (Compressed) instructions.
 class Instr_C:
-    def __init__(self, instr):
+    def __init__(self, instr: int):
         self._instr = instr
-        self._opcode = self._instr & 0x3
-        self._funct3 = self._instr >> 13 & 0x7
-        # CA format
-        self._funct6_CA = self._instr >> 10 & 0x3f
-        self._rd_rs1_CA = 0x8 + (self._instr >> 7 & 0x7)
-        self._funct2_CA = self._instr >> 5 & 0x3
-        self._rs2_CA = 0x8 + (self._instr >> 2 & 0x7)
+        self._opcode = Bit_Utils.bit_slice(self._instr, 1, 0)
+        self._funct3 = Bit_Utils.bit_slice(self._instr, 15, 13)
+
         # CR format
-        self._funct4_CR = self._instr >> 12 & 0xf
-        self._rd_rs1_CR = self._instr >> 7 & 0x1f
-        self._rs2_CR = self._instr >> 2 & 0x1f
+        self._funct4_CR = Bit_Utils.bit_slice(self._instr, 15, 12)
+        self._rd_rs1_CR = Bit_Utils.bit_slice(self._instr, 11, 7)
+        self._rs2_CR = Bit_Utils.bit_slice(self._instr, 6, 2)
+
+        # CA format
+        self._funct6_CA = Bit_Utils.bit_slice(self._instr, 15, 10)
+        self._rd_rs1_CA = 0x8 | Bit_Utils.bit_slice(self._instr, 9, 7)
+        self._funct2_CA = Bit_Utils.bit_slice(self._instr, 6, 5)
+        self._rs2_CA = 0x8 | Bit_Utils.bit_slice(self._instr, 4, 2)
 
         self._op = self._C_ADD
         if self._opcode == RISCV_OPCODE.C1:
@@ -41,7 +43,7 @@ class Instr_C:
                 self._op = self._C_ADD
         print(self._op)
 
-    def execute(self, m_state):
+    def execute(self, m_state: Machine_State):
         self._op(m_state)
 
     def _C_SUB(self, m_state):
