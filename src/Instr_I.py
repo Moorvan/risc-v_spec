@@ -161,8 +161,7 @@ class Instr_I:
         Instr_I.exec_AUIPC(False, self._rd, self._imm20_U, m_state)
 
     def _LUI(self, m_state):
-        rd_val = self._imm20_U << 12
-        m_state.gprs.set_reg(self._rd, rd_val)
+        Instr_I.exec_LUI(False, self._rd, self._imm20_U, m_state)
 
     def _JAL(self, m_state):
         Instr_I.exec_JAL(False, self._rd, self._imm21_J, m_state)
@@ -307,6 +306,11 @@ class Instr_I:
         Instr_I.exec_OP_32(ALU.alu_sraw, False, self._rd, self._rs1, self._rs2, m_state)
 
     @classmethod
+    def exec_LUI(cls, is_C, rd, imm20, m_state):
+        rd_val = Bit_Utils.get_signed(32, imm20 << 12)
+        Instr_Common.finish_rd_and_pc_incr(rd, rd_val, is_C, m_state)
+
+    @classmethod
     def exec_AUIPC(cls, is_C, rd, imm20, m_state):
         s_offset = Bit_Utils.get_signed(32, imm20 << 12)
         rd_val = ALU.alu_add(s_offset, m_state.pc)
@@ -371,9 +375,12 @@ class Instr_I:
         addr = ALU.alu_add(rs1_val, s_imm12)
 
         res = m_state.mem.get_mem(addr)
-        if funct3 == RISCV_FUNCT3.LBU or funct3 == RISCV_FUNCT3.LHU or funct3 == RISCV_FUNCT3.LWU:
-            mask = 0xffff_ffff_ffff_ffff
-            rd_val = res & mask
+        if funct3 == RISCV_FUNCT3.LB:
+            rd_val = Bit_Utils.get_signed(8, res)
+        elif funct3 == RISCV_FUNCT3.LH:
+            rd_val = Bit_Utils.get_signed(16, res)
+        elif funct3 == RISCV_FUNCT3.LW:
+            rd_val = Bit_Utils.get_signed(32, res)
         else:
             rd_val = res
 

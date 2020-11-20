@@ -15,4 +15,4 @@ class Bit_Utils:
 
 
 if __name__ == '__main__':
-    print(bin(Bit_Utils.bit_slice(0b1100101011011, 3, 1)))
+    print(Bit_Utils.get_signed(10, -1))

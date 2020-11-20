@@ -84,6 +84,10 @@ class RISCV_FUNCT3:
     SRAW = 0x5
 
     # C
+    C_LWSP = 0x2
+    C_LDSP = 0x3
+    C_SWSP = 0x6
+    C_SDSP = 0x7
     C_LW = 0x2
     C_LD = 0x3
     C_SW = 0x6
@@ -102,6 +106,7 @@ class RISCV_FUNCT3:
     C_ADDI4SPN = 0x0
     C_SLLI = 0x0
     C_SRLI = 0x4
+    C_SRAI = 0x4
     C_ANDI = 0x4
 
 
@@ -157,4 +162,8 @@ class RISCV_OTHER:
     FUNCT2_C_XOR = 0x1
     FUNCT6_C_SUB = 0x23
     FUNCT2_C_SUB = 0x0
+    FUNCT6_C_ADDW = 0x27
+    FUNCT2_C_ADDW = 0x1
+    FUNCT6_C_SUBW = 0x27
+    FUNCT2_C_SUBW = 0x0
     FUNCT4_C_EBREAK = 0x9

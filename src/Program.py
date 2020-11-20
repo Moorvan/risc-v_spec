@@ -27,8 +27,16 @@ class Program:
             return False
         return True
 
+    def test_set(self):
+        self._m_state.pc = 0
+        self._instrs = {
+            0: 0xa89d
+        }
+
 
 if __name__ == '__main__':
     p = Program("a.out")
+    p.test_set()
     p.run_one_step()
-    p.print_info()
+
+
