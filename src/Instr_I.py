@@ -1,5 +1,4 @@
 from ALU import *
-from Machine_State import *
 from RISCV_Defs import *
 from Instr_Common import *
 from Bit_Utils import *
@@ -20,7 +19,7 @@ class Instr_I:
         self._rs2 = Bit_Utils.bit_slice(self._instr, 24, 20)
         self._funct7 = Bit_Utils.bit_slice(self._instr, 31, 25)
 
-        self._imm12_I = Bit_Utils.bit_slice(self._instr, 31, 25)
+        self._imm12_I = Bit_Utils.bit_slice(self._instr, 31, 20)
 
         self._imm12_S = (Bit_Utils.bit_slice(self._instr, 31, 25) << 5) | \
                         (Bit_Utils.bit_slice(self._instr, 11, 7))
@@ -236,6 +235,7 @@ class Instr_I:
         Instr_I.exec_OP_IMM(ALU.alu_or, False, self._rd, self._rs1, self._imm12_I, m_state)
 
     def _ANDI(self, m_state):
+        print("andi rd: x%d, rs1: x%d, imm12: 0x%x" % (self._rd, self._rs1, self._imm12_I))
         Instr_I.exec_OP_IMM(ALU.alu_and, False, self._rd, self._rs1, self._imm12_I, m_state)
 
     def _SLLI(self, m_state):
@@ -248,8 +248,7 @@ class Instr_I:
         Instr_I.exec_OP_IMM(ALU.alu_sra, False, self._rd, self._rs1, self._shamt, m_state)
 
     def _ADDIW(self, m_state):
-        Instr_I.exec_OP_IMM_32(ALU.alu_addw, False, self._rd, self._rs1, Bit_Utils.get_signed(12, self._imm12_I),
-                               m_state)
+        Instr_I.exec_OP_IMM_32(ALU.alu_addw, False, self._rd, self._rs1, Bit_Utils.get_signed(12, self._imm12_I), m_state)
 
     def _SLLIW(self, m_state):
         Instr_I.exec_OP_IMM_32(ALU.alu_sllw, False, self._rd, self._rs1, self._shamt5, m_state)
@@ -337,7 +336,7 @@ class Instr_I:
             rd_val = pc + 4
         rs1_val = m_state.gprs.get_reg(rs1)
         s_offset = Bit_Utils.get_signed(12, imm12)
-        new_pc = ALU.alu_add(rs1_val, s_offset)
+        new_pc = (ALU.alu_add(rs1_val, s_offset)) & ~1
         Instr_Common.finish_rd_and_pc(rd, rd_val, new_pc, m_state)
 
     @classmethod

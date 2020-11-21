@@ -21,7 +21,7 @@ class Memory:
 
     def print_mem(self):
         for (addr, v) in self._data.items():
-            print(str(hex(addr)) + ": " + str(v))
+            print("0x%x: 0x%x" % (addr, v))
 
 
 if __name__ == '__main__':

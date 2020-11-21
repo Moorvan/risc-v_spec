@@ -88,9 +88,9 @@ def get_Instrs(fileName: str):
     text_offset = tmp[4]
     text_size = tmp[5]
     text_end_addr = text_start_addr + text_size
-    # print('%x' % text_offset)
     pc = elfHeader['e_entry']
-    # print('%x' % pc)
+    print('start: %x' % text_start_addr)
+    print('end: %x' % text_end_addr)
     f.close()
 
     instrs = {}
@@ -99,7 +99,7 @@ def get_Instrs(fileName: str):
     f.seek(text_offset)
     while addr != text_end_addr:
         tmp = int.from_bytes(f.read(2), byteorder='little', signed=False)
-        # print('%x: ' % addr, end='')
+        print('%x: ' % addr, end='')
         if tmp & 0b11 == 0b11:
             tmp += int.from_bytes(f.read(2), byteorder='little', signed=False) << 16
             instrs[addr] = tmp
@@ -107,7 +107,7 @@ def get_Instrs(fileName: str):
         else:
             instrs[addr] = tmp
             addr += 2
-        # print('%x' % tmp)
+        print('%x' % tmp)
 
     return pc, instrs
 

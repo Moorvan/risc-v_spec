@@ -1,4 +1,3 @@
-from RISCV_Defs import *
 from Instr_I import *
 
 
@@ -424,4 +423,4 @@ class Instr_C:
 
 
 if __name__ == '__main__':
-    i = Instr_C(0x8082)
+    i = Instr_C(0xeca6)
