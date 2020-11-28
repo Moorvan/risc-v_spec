@@ -14,8 +14,8 @@ class Machine_State:
         print("GPR File:")
         self.gprs.print_regs()
         print()
-        print("Memory:")
-        self.mem.print_mem()
+        # print("Memory:")
+        # self.mem.print_mem()
         print("====================END====================")
 
 

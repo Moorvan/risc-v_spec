@@ -7,7 +7,7 @@ from Instr_I import *
 class Program:
     def __init__(self, fileName):
         self._m_state = Machine_State()
-        self._m_state.pc, self._instrs = Read_ELF_file.get_Instrs(fileName)
+        self._m_state.pc, self._instrs = Read_ELF_file.read_elf(fileName, self._m_state.mem)
         self._instr_cnt = 0
 
     def run_one_step(self):
@@ -27,9 +27,13 @@ class Program:
         while True:
             print()
             print("%d  pc  0x%x  instr 0x%x" % (self._instr_cnt, self._m_state.pc, self._instrs[self._m_state.pc]))
+            cur_pc = self._m_state.pc
             self._instr_cnt += 1
             self.run_one_step()
             self.print_info()
+            if cur_pc == self._m_state.pc:
+                print("Reached jump-to-self infinite loop; exiting.")
+                break
 
     def run_without_info(self):
         while True:
@@ -41,15 +45,9 @@ class Program:
             return False
         return True
 
-    def test_set(self):
-        self._m_state.pc = 0
-        self._instrs = {
-            0: 0xa89d
-        }
-
 
 if __name__ == '__main__':
-    p = Program("a.out")
+    p = Program("hello64")
     p.run_with_info()
 
 

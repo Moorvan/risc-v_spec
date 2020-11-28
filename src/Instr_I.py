@@ -44,7 +44,7 @@ class Instr_I:
         self._shamt = Bit_Utils.bit_slice(self._instr, 25, 20)
         self._shamt5 = Bit_Utils.bit_slice(self._instr, 24, 20)
 
-        self._op = self._ADD
+        # self._op = self._ADD
         if self._opcode == RISCV_OPCODE.AUIPC:
             self._op = self._AUIPC
         elif self._opcode == RISCV_OPCODE.LUI:
@@ -87,7 +87,7 @@ class Instr_I:
             elif self._funct3 == RISCV_FUNCT3.SH:
                 self._op = self._SH
             elif self._funct3 == RISCV_FUNCT3.SW:
-                self._op = self._SH
+                self._op = self._SW
             elif self._funct3 == RISCV_FUNCT3.SD:
                 self._op = self._SD
         elif self._opcode == RISCV_OPCODE.OP_IMM:
@@ -373,7 +373,7 @@ class Instr_I:
         s_imm12 = Bit_Utils.get_signed(12, imm12)
         addr = ALU.alu_add(rs1_val, s_imm12)
 
-        res = m_state.mem.get_mem(addr)
+        res = m_state.mem.get_mem(addr, funct3)
         if funct3 == RISCV_FUNCT3.LB:
             rd_val = Bit_Utils.get_signed(8, res)
         elif funct3 == RISCV_FUNCT3.LH:
@@ -393,7 +393,7 @@ class Instr_I:
         s_imm12 = Bit_Utils.get_signed(12, imm12)
         addr = ALU.alu_add(rs1_val, s_imm12)
 
-        m_state.mem.set_mem(addr, rs2_val)
+        m_state.mem.set_mem(addr, rs2_val, funct3)
         Instr_Common.finish_pc_incr(is_C, m_state)
 
     @classmethod

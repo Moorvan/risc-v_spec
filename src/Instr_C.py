@@ -98,7 +98,7 @@ class Instr_C:
                          (Bit_Utils.bit_slice(self._instr, 5, 3) << 1) | \
                          (Bit_Utils.bit_slice(self._instr, 2, 2) << 5)
 
-        self._op = self._C_ADD
+        # self._op = self._C_ADD
         if self._opcode == RISCV_OPCODE.C0:
             if self._funct3 == RISCV_FUNCT3.C_ADDI4SPN and self._nzuimm10_CIW != 0:
                 self._op = self._C_ADDI4SPN
@@ -115,8 +115,6 @@ class Instr_C:
                 self._op = self._C_NOP
             elif self._funct3 == RISCV_FUNCT3.C_ADDI and self._rd_rs1_CI != 0 and self._imm6_CI != 0:
                 self._op = self._C_ADDI
-            elif self._funct3 == RISCV_FUNCT3.C_JAL:
-                self._op = self._C_JAL
             elif self._funct3 == RISCV_FUNCT3.C_ADDIW and self._rd_rs1_CI != 0:
                 self._op = self._C_ADDIW
             elif self._funct3 == RISCV_FUNCT3.C_LI and self._rd_rs1_CI != 0:
@@ -232,12 +230,8 @@ class Instr_C:
     def _C_ADDI(self, m_state):
         imm12 = Bit_Utils.get_signed(6, self._imm6_CI)
         rd_rs1 = self._rd_rs1_CI
+        print("addi rd/rs1: x%d, imm12=%x" % (rd_rs1, imm12))
         Instr_I.exec_OP_IMM(ALU.alu_add, True, rd_rs1, rd_rs1, imm12, m_state)
-
-    def _C_JAL(self, m_state):
-        rd = 1
-        imm21 = Bit_Utils.get_signed(12, self._imm12_CJ)
-        Instr_I.exec_JAL(True, rd, imm21, m_state)
 
     def _C_ADDIW(self, m_state):
         imm12 = Bit_Utils.get_signed(6, self._imm6_CI)
@@ -293,7 +287,7 @@ class Instr_C:
     def _is_C_ANDI(self):
         funct3, offset_12_10, r_prime, offset_6_2, op = self._instr_fields_CB()
         funct2 = Bit_Utils.bit_slice(offset_12_10, 1, 0)
-        if funct3 == RISCV_FUNCT3.ANDI and funct2 == RISCV_OTHER.FUNCT2_C_ANDI and \
+        if funct3 == RISCV_FUNCT3.C_ANDI and funct2 == RISCV_OTHER.FUNCT2_C_ANDI and \
            op == RISCV_OPCODE.C1:
             return True
         return False
@@ -357,7 +351,7 @@ class Instr_C:
         funct3, imm_12, rd_rs1, imm_6_2, op = self._instr_fields_CI()
         shamt6_5 = imm_12
         shamt6 = (shamt6_5 << 5) | imm_6_2
-        if funct3 == RISCV_FUNCT3.SLLI and op == RISCV_OPCODE.C2 and shamt6 != 0:
+        if funct3 == RISCV_FUNCT3.C_SLLI and op == RISCV_OPCODE.C2 and shamt6 != 0:
             return True
         return False
 
@@ -423,4 +417,4 @@ class Instr_C:
 
 
 if __name__ == '__main__':
-    i = Instr_C(0xeca6)
+    i = Instr_C(0x2705)

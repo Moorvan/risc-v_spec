@@ -1,4 +1,5 @@
 import struct
+from Memory import *
 
 elfHeader = {}
 
@@ -74,45 +75,63 @@ def show_elfHeader(fileName: str):
     print("Section header string table index:  %d" % elfHeader['e_shstrndx'])
 
 
-def get_Instrs(fileName: str):
+def read_elf(fileName: str, mem: Memory):
     if not verify_elf(fileName):
         return
+    pc = elfHeader['e_entry']
     sec_start = elfHeader['e_shoff']
     sec_size = elfHeader['e_shentsize']
-    f = open(fileName, 'rb')
-    f.seek(sec_start)
-    f.read(sec_size)
-    tmp = f.read(sec_size)
-    tmp = struct.unpack('2I4Q2I2Q', tmp)
-    text_start_addr = tmp[3]
-    text_offset = tmp[4]
-    text_size = tmp[5]
-    text_end_addr = text_start_addr + text_size
-    pc = elfHeader['e_entry']
-    print('start: %x' % text_start_addr)
-    print('end: %x' % text_end_addr)
-    f.close()
-
+    sec_num = elfHeader['e_shnum']
+    fh = open(fileName, 'rb')
+    fh.seek(sec_start)
     instrs = {}
-    addr = text_start_addr
-    f = open(fileName, 'rb')
-    f.seek(text_offset)
-    while addr != text_end_addr:
-        tmp = int.from_bytes(f.read(2), byteorder='little', signed=False)
-        print('%x: ' % addr, end='')
-        if tmp & 0b11 == 0b11:
-            tmp += int.from_bytes(f.read(2), byteorder='little', signed=False) << 16
-            instrs[addr] = tmp
-            addr += 4
-        else:
-            instrs[addr] = tmp
-            addr += 2
-        print('%x' % tmp)
+    for i in range(0, sec_num):
+        tmp = fh.read(sec_size)
+        tmp = struct.unpack("2I4Q2I2Q", tmp)
+        if tmp[2] == 6:  # section_flags == 'AX'
+            text_start_addr = tmp[3]
+            text_offset = tmp[4]
+            text_size = tmp[5]
+            text_end_addr = text_start_addr + text_size
+            # print('start: %x' % text_start_addr)
+            # print('end: %x' % text_end_addr)
+
+            addr = text_start_addr
+            f = open(fileName, 'rb')
+            f.seek(text_offset)
+            while addr != text_end_addr:
+                tmp = int.from_bytes(f.read(2), byteorder='little', signed=False)
+                # print('%x: ' % addr, end='')
+                if tmp & 0b11 == 0b11:
+                    tmp += int.from_bytes(f.read(2), byteorder='little', signed=False) << 16
+                    instrs[addr] = tmp
+                    addr += 4
+                else:
+                    instrs[addr] = tmp
+                    addr += 2
+                # print('%x' % tmp)
+            f.close()
+        elif tmp[2] == 2 or tmp[2] == 3:  # section_flags == 'A' or 'WA'
+            section_start_addr = tmp[3]
+            section_offset = tmp[4]
+            section_size = tmp[5]
+            section_end_addr = section_start_addr + section_size
+
+            addr = section_start_addr
+            f = open(fileName, 'rb')
+            f.seek(section_offset)
+            while addr != section_end_addr:
+                tmp = int.from_bytes(f.read(1), byteorder='little', signed=False)
+                mem.set_mem(addr, tmp, RISCV_FUNCT3.SB)
+                addr += 1
+
+    fh.close()
 
     return pc, instrs
 
 
 if __name__ == '__main__':
-    pc, instrs = get_Instrs("a.out")
+    mem = Memory()
+    pc, instrs = read_elf("hello64", mem)
     print('pc: %x' % pc)
 #     show_elfHeader("a.out")

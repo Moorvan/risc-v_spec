@@ -26,9 +26,12 @@ class GPR_File:
 
     def print_regs(self):
         for i, v in enumerate(self._regs):
-            print("x" + str(i) + ": " + "0x%x" % v)
+            if i % 4 == 0:
+                print("x%d-x%d:" % (i, i + 3), end='  ')
+            print("0x%x" % v, end='  ')
+            if (i + 1) % 4 == 0:
+                print()
 
 
 if __name__ == '__main__':
-    p_GPR_File = GPR_File()
-    p_GPR_File.print_regs()
+    pass
