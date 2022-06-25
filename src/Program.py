@@ -1,5 +1,4 @@
 import Read_ELF_file
-from Machine_State import *
 from Instr_C import *
 from Instr_I import *
 
@@ -37,7 +36,11 @@ class Program:
 
     def run_without_info(self):
         while True:
+            cur_pc = self._m_state.pc
             self.run_one_step()
+            if cur_pc == self._m_state.pc:
+                print("Reached jump-to-self infinite loop; exiting.")
+                break
 
     @classmethod
     def is_C(cls, instr: int):
@@ -49,5 +52,6 @@ class Program:
 if __name__ == '__main__':
     p = Program("../cases/hello64")
     p.run_with_info()
+    # p.run_without_info()
 
 

@@ -150,7 +150,7 @@ class Instr_I:
                 self._op = self._SRLW
             elif self._funct3 == RISCV_FUNCT3.SRAW and self._funct7 == RISCV_FUNCT7.SRAW:
                 self._op = self._SRAW
-        print(self._op)
+        print("instr name: " + self._op.__name__[1:])
 
     # this function can change the input machine state after executing the instruction
     def execute(self, m_state: Machine_State):
@@ -235,7 +235,7 @@ class Instr_I:
         Instr_I.exec_OP_IMM(ALU.alu_or, False, self._rd, self._rs1, self._imm12_I, m_state)
 
     def _ANDI(self, m_state):
-        print("andi rd: x%d, rs1: x%d, imm12: 0x%x" % (self._rd, self._rs1, self._imm12_I))
+        # print("andi rd: x%d, rs1: x%d, imm12: 0x%x" % (self._rd, self._rs1, self._imm12_I))
         Instr_I.exec_OP_IMM(ALU.alu_and, False, self._rd, self._rs1, self._imm12_I, m_state)
 
     def _SLLI(self, m_state):

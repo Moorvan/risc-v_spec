@@ -169,7 +169,7 @@ class Instr_C:
                 self._op = self._C_SWSP
             elif self._funct3 == RISCV_FUNCT3.C_SDSP:
                 self._op = self._C_SDSP
-        print(self._op)
+        print("instr name: " + self._op.__name__[1:])
 
     def _instr_fields_CI(self):
         funct3 = Bit_Utils.bit_slice(self._instr, 15, 13)
