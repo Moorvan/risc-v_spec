@@ -1,8 +1,6 @@
 from functools import reduce
 
 from Program import *
-from Instr_I import *
-from Machine_State import *
 import os
 
 
